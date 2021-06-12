@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Promo from '../promo/promo';
 
 
-function MainPage(props) {
+function MainPageScreen(props) {
   const {promoCount} = props;
   let index = 0;
   const promos = new Array(promoCount).fill(null).map(() => {
@@ -112,8 +112,8 @@ function MainPage(props) {
   );
 }
 
-MainPage.propTypes = {
+MainPageScreen.propTypes = {
   promoCount: PropTypes.number.isRequired,
 };
 
-export default MainPage;
+export default MainPageScreen;
