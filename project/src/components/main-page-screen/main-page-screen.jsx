@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Promo from '../promo/promo';
 
-
 function MainPageScreen(props) {
-  const {promoCount} = props;
-  let index = 0;
-  const promos = new Array(promoCount).fill(null).map(() => {
-    index++;
-    return (<Promo key={index}/>);
-  });
+  const [userOffers, setUserOffers] = useState([false, false, false, false]);
+
+
+  const {offers} = props;
+  const updateState = (id) => {
+    setUserOffers([...userOffers.slice(0, id-1), true, ...userOffers.slice(id)]);
+  };
+  const promos = offers.map((offer) =>
+    (<Promo offer={offer} key={offer.id} updateState={updateState}/>),
+  );
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -112,8 +115,9 @@ function MainPageScreen(props) {
   );
 }
 
-MainPageScreen.propTypes = {
-  promoCount: PropTypes.number.isRequired,
-};
+MainPageScreen.propTypes =
+  {
+    offers: PropTypes.array.isRequired,
+  };
 
 export default MainPageScreen;

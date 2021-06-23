@@ -10,19 +10,19 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 
 function App(props) {
-  const {promoCount} = props;
+  const {offers} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <MainPageScreen promoCount={promoCount}/>
+          <MainPageScreen offers={offers}/>
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <AuthScreen/>
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <FavoritesScreen/>
+          <FavoritesScreen offers={offers}/>
         </Route>
         <Route exact path={AppRoute.ROOM}>
           <RoomScreen/>
@@ -36,7 +36,7 @@ function App(props) {
 }
 
 App.propTypes = {
-  promoCount: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired,
 };
 
 export default App;
