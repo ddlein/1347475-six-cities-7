@@ -182,7 +182,7 @@ function RoomScreen() {
                     </div>
                   </li>
                 </ul>
-                <SendReview></SendReview>
+                <SendReview/>
               </section>
             </div>
           </div>
