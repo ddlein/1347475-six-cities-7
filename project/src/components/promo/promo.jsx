@@ -1,18 +1,23 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
-import {/*useHistory*/ Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import mainPageScreenProp from '../main-page-screen/main-page-screen.prop';
 import {AppRoute} from '../../const';
 
 function Promo(props) {
-  const {offer, updateState} = props;
+  const {offer, updateState, onOfferItemHover} = props;
   const {price, title, type, previewImage, id} = offer;
-  const onMouseOverHandler = (() => {updateState(id);});
 
-  // const history = useHistory();
+  const offerRef = useRef(null);
+
+  const onMouseOverHandler = ((evt) => {
+    onOfferItemHover(id);
+    updateState(id);
+  });
+
 
   return (
-    <article className="cities__place-card place-card" onMouseOver={onMouseOverHandler}>
+    <article className="cities__place-card place-card" ref={offerRef} onMouseOver={onMouseOverHandler}>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={AppRoute.ROOM}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
@@ -51,6 +56,7 @@ function Promo(props) {
 Promo.propTypes = {
   offer: mainPageScreenProp,
   updateState: PropTypes.func.isRequired,
+  onOfferItemHover: PropTypes.func.isRequired,
 };
 
 export default Promo;

@@ -3,10 +3,10 @@ const AVATAR_URL = 'https://i.pravatar.cc/128';
 const offers = [
   {
     city: {
-      name: 'Cologne',
+      name: 'Amsterdam',
       location: {
-        latitude: 50.938361,
-        longitude: 6.959974,
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
         zoom: 13,
       },
     },
@@ -62,10 +62,10 @@ const offers = [
   },
   {
     city: {
-      name: 'Cologne',
+      name: 'Amsterdam',
       location: {
-        latitude: 52.37454,
-        longitude: 4.897976,
+        latitude: 52.369553943508,
+        longitude: 4.85309666406198,
         zoom: 13,
       },
     },
@@ -118,10 +118,10 @@ const offers = [
   },
   {
     city: {
-      name: 'Dusseldorf',
+      name: 'Amsterdam',
       location: {
-        latitude: 51.225402,
-        longitude: 6.776314,
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
         zoom: 13,
       },
     },
@@ -178,10 +178,10 @@ const offers = [
   },
   {
     city: {
-      name: 'Brussels',
+      name: 'Amsterdam',
       location: {
-        latitude: 50.846557,
-        longitude: 4.351697,
+        latitude: 52.3809553943508,
+        longitude: 4.939309666406198,
         zoom: 13,
       },
     },
