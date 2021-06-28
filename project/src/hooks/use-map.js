@@ -29,7 +29,7 @@ function useMap(mapRef, city) {
 
       setMap(mapView);
       return () => {
-        console.log(1);
+        // console.log(1);
         // mapView.remove();
         mapView.off();
       };
