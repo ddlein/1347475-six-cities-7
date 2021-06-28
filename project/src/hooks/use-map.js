@@ -17,7 +17,6 @@ function useMap(mapRef, city) {
         marker: true,
       });
 
-      mapView.setView([city.latitude, city.longitude], city.zoom);
 
       leaflet
         .tileLayer(
@@ -29,6 +28,11 @@ function useMap(mapRef, city) {
         .addTo(mapView);
 
       setMap(mapView);
+      return () => {
+        console.log(1);
+        // mapView.remove();
+        mapView.off();
+      };
     }
   }, [mapRef, map, city]);
 

@@ -16,7 +16,7 @@ function App(props) {
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <MainPageScreen offers={offers} /*city={CITY}*//>
+          <MainPageScreen offers={offers}/>
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <AuthScreen/>

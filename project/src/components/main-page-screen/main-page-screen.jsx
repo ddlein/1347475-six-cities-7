@@ -5,23 +5,16 @@ import MapCity from '../map/map-city';
 import {CITY} from '../../const';
 
 function MainPageScreen(props) {
-  const [selectedOffer, setSelectedOffer] = useState({});
-  const [userOffers, setUserOffers] = useState([false, false, false, false]);
+  const [selectedOfferId, setSelectedId] = useState(null);
 
   const {offers} = props;
 
-  const onOfferItemHover = (offerItemName) => {
-    const currentOffer = offers.find((offer) =>
-      offer.id === offerItemName,
-    );
-    setSelectedOffer(currentOffer);
+  const onOfferIdHover = (offerId) => {
+    setSelectedId(offerId);
   };
 
-  const updateState = (id) => {
-    setUserOffers([...userOffers.slice(0, id-1), true, ...userOffers.slice(id)]);
-  };
   const promos = offers.map((offer) =>
-    (<Promo offer={offer} key={offer.id} updateState={updateState} onOfferItemHover={onOfferItemHover}/>),
+    (<Promo offer={offer} key={offer.id} onOfferIdHover={onOfferIdHover}/>),
   );
   return (
     <div className="page page--gray page--main">
@@ -116,7 +109,7 @@ function MainPageScreen(props) {
               </div>
             </section>
             <div className="cities__right-section">
-              <MapCity city={CITY} offers={offers} selectedOffer={selectedOffer}/>
+              <MapCity city={CITY} offers={offers} selectedOfferId={selectedOfferId}/>
             </div>
           </div>
         </div>

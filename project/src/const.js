@@ -7,7 +7,7 @@ const AppRoute = {
 
 
 const CITY = {
-  title: 'Нью-Йорк',
+  title: 'Амстердам',
   latitude: 52.38333,
   longitude: 4.9,
   zoom: 12,
