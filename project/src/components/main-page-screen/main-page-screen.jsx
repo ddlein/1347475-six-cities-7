@@ -6,7 +6,6 @@ import {CITY} from '../../const';
 
 function MainPageScreen(props) {
   const [selectedOfferId, setSelectedId] = useState(null);
-
   const {offers} = props;
 
   const onOfferIdHover = (offerId) => {
