@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Promo from '../promo/promo';
+import MapCity from '../map/map-city';
+import {CITY} from '../../const';
 
 function MainPageScreen(props) {
-  const [userOffers, setUserOffers] = useState([false, false, false, false]);
-
-
+  const [selectedOfferId, setSelectedId] = useState(null);
   const {offers} = props;
-  const updateState = (id) => {
-    setUserOffers([...userOffers.slice(0, id-1), true, ...userOffers.slice(id)]);
+
+  const onOfferIdHover = (offerId) => {
+    setSelectedId(offerId);
   };
+
   const promos = offers.map((offer) =>
-    (<Promo offer={offer} key={offer.id} updateState={updateState}/>),
+    (<Promo offer={offer} key={offer.id} onOfferIdHover={onOfferIdHover}/>),
   );
   return (
     <div className="page page--gray page--main">
@@ -106,7 +108,7 @@ function MainPageScreen(props) {
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"/>
+              <MapCity city={CITY} offers={offers} selectedOfferId={selectedOfferId}/>
             </div>
           </div>
         </div>
