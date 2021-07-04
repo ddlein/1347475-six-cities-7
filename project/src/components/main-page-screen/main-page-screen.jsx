@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Promo from '../promo/promo';
-import MapCity from '../map/map-city';
+import MapCityMain from '../map/map-city-main';
 import {CITY} from '../../const';
 
 function MainPageScreen(props) {
@@ -108,7 +108,7 @@ function MainPageScreen(props) {
               </div>
             </section>
             <div className="cities__right-section">
-              <MapCity city={CITY} offers={offers} selectedOfferId={selectedOfferId}/>
+              <MapCityMain city={CITY} offers={offers} selectedOfferId={selectedOfferId} className={'cities__map map'}/>
             </div>
           </div>
         </div>

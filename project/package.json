@@ -50,6 +50,7 @@
     "axios-mock-adapter": "^1.19.0",
     "eslint-config-htmlacademy": "^4.0.1",
     "redux-devtools-extension": "^2.13.9",
-    "redux-mock-store": "^1.5.4"
+    "redux-mock-store": "^1.5.4",
+    "nanoid": "3.1.22"
   }
 }
