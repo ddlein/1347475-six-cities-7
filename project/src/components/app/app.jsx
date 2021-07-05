@@ -10,7 +10,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 
 function App(props) {
-  const {offers} = props;
+  const {offers, comments} = props;
 
   return (
     <BrowserRouter>
@@ -25,7 +25,7 @@ function App(props) {
           <FavoritesScreen offers={offers}/>
         </Route>
         <Route exact path={AppRoute.ROOM}>
-          <RoomScreen/>
+          <RoomScreen comments={comments} offers={offers} id={1}/>
         </Route>
         <Route>
           <NotFoundScreen/>
@@ -37,6 +37,7 @@ function App(props) {
 
 App.propTypes = {
   offers: PropTypes.array.isRequired,
+  comments: PropTypes.array.isRequired,
 };
 
 export default App;

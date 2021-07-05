@@ -13,5 +13,18 @@ const CITY = {
   zoom: 12,
 };
 
+const OfferType = {
+  ROOM: 'room',
+  HOUSE: 'house',
+  HOTEL: 'hotel',
+  APARTMENT: 'apartment',
+};
 
-export {AppRoute, CITY};
+const OfferTypeToText = {
+  [OfferType.ROOM]: 'Private room',
+  [OfferType.HOUSE]: 'House',
+  [OfferType.APARTMENT]: 'Apartment',
+  [OfferType.HOTEL]: 'Hotel',
+};
+
+export {AppRoute, CITY, OfferType, OfferTypeToText};

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Promo from '../promo/promo';
-import MapCity from '../map/map-city';
+import MapCityMain from '../map-city-main/map-city-main';
 import {CITY} from '../../const';
 
 function MainPageScreen(props) {
@@ -12,9 +12,11 @@ function MainPageScreen(props) {
     setSelectedId(offerId);
   };
 
-  const promos = offers.map((offer) =>
-    (<Promo offer={offer} key={offer.id} onOfferIdHover={onOfferIdHover}/>),
-  );
+  const promos = offers.map((offer) => (
+    <Promo offer={offer} key={offer.id} onOfferIdHover={onOfferIdHover} classCard="cities__place-card"
+      classImage="cities__image-wrapper"
+    />));
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -108,7 +110,7 @@ function MainPageScreen(props) {
               </div>
             </section>
             <div className="cities__right-section">
-              <MapCity city={CITY} offers={offers} selectedOfferId={selectedOfferId}/>
+              <MapCityMain city={CITY} offers={offers} selectedOfferId={selectedOfferId} classMap="cities__map"/>
             </div>
           </div>
         </div>
