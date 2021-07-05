@@ -15,7 +15,7 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [15, 30],
 });
 
-function MapCityMain({city, offers, selectedOfferId, className}) {
+function MapCityMain({city, offers, selectedOfferId, classMap}) {
   const mapRef = useRef(null);
   const map = useRef(null);
 
@@ -69,7 +69,7 @@ function MapCityMain({city, offers, selectedOfferId, className}) {
   }, [offers, selectedOfferId]);
 
   return (
-    <section className={className}>
+    <section className={`${classMap} map`}>
       <div id="map" style={{height: '100%'}} ref={mapRef}/>
     </section>
   );
@@ -79,7 +79,7 @@ MapCityMain.propTypes = {
   city: PropTypes.object.isRequired,
   offers: PropTypes.array.isRequired,
   selectedOfferId: PropTypes.number,
-  className: PropTypes.string.isRequired,
+  classMap: PropTypes.string.isRequired,
 };
 
 export default MapCityMain;

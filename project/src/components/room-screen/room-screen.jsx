@@ -3,18 +3,19 @@ import Logo from '../logo/logo';
 import SendReview from '../send-review/send-review';
 import ReviewsList from '../reviews-list/reviews-list';
 import PropTypes from 'prop-types';
-import {CITY} from '../../const';
-import {nanoid} from 'nanoid';
+import {CITY, OfferTypeToText} from '../../const';
 import Promo from '../promo/promo';
-import MapCityMain from '../map/map-city-main';
+import MapCityMain from '../map-city-main/map-city-main';
+
 
 function RoomScreen(props) {
   const [selectedOfferId, setSelectedId] = useState(null);
 
   const {comments, offers, id} = props;
+
   const offer = offers.find((offerElement) => offerElement.id === id);
   const offersNearby = offers.filter((offerElement) => offerElement.id !== id);
-  const images = offer.images; //
+  const images = offer.images;
   const goods = offer.goods;
 
   const onOfferIdHover = (offerId) => {
@@ -22,7 +23,7 @@ function RoomScreen(props) {
   };
 
   const promos = offersNearby.map((offerElement) =>
-    (<Promo offer={offerElement} key={offerElement.id} onOfferIdHover={onOfferIdHover}/>),
+    (<Promo offer={offerElement} key={offerElement.id} onOfferIdHover={onOfferIdHover} classCard="near-places__card" classImage="near-places__image-wrapper"/>),
   );
 
   return (
@@ -56,7 +57,7 @@ function RoomScreen(props) {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {images.map((image) => (
-                <div className="property__image-wrapper" key={nanoid()}>
+                <div className="property__image-wrapper" key={image}>
                   <img className="property__image" src={image} alt="Photo studio"/>
                 </div>
               ))}
@@ -87,7 +88,7 @@ function RoomScreen(props) {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {offer.type}
+                  {OfferTypeToText[offer.type]}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {offer.bedrooms} Bedrooms
@@ -104,7 +105,7 @@ function RoomScreen(props) {
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   {goods.map((good) => (
-                    <li className="property__inside-item" key={nanoid()}>
+                    <li className="property__inside-item" key={good}>
                       {good}
                     </li>
                   ))}
@@ -121,9 +122,11 @@ function RoomScreen(props) {
                   <span className="property__user-name">
                     {offer.host.name}
                   </span>
-                  <span className="property__user-status">
-                Pro
-                  </span>
+                  {offer.host.isPro ? (
+                    <span className="property__user-status">
+                      Pro
+                    </span>)
+                    : ''}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -145,8 +148,9 @@ function RoomScreen(props) {
             </div>
           </div>
           <section className="property__map map">
-            {/*<MapCityRoom city={CITY} offers={offersNearby} />*/}
-            <MapCityMain city={CITY} offers={offersNearby} selectedOfferId={selectedOfferId} className={'property__map map'}/>
+            <MapCityMain city={CITY} offers={offersNearby} selectedOfferId={selectedOfferId}
+              classMap="property__map"
+            />
           </section>
 
 
@@ -166,7 +170,6 @@ function RoomScreen(props) {
 
 RoomScreen.propTypes = {
   comments: PropTypes.array.isRequired,
-  // images: PropTypes.array,
   offers: PropTypes.array.isRequired,
   id: PropTypes.number.isRequired,
 };

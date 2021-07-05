@@ -5,7 +5,7 @@ import mainPageScreenProp from '../main-page-screen/main-page-screen.prop';
 import {AppRoute} from '../../const';
 
 function Promo(props) {
-  const {offer, onOfferIdHover} = props;
+  const {offer, onOfferIdHover, classCard, classImage} = props;
   const {price, title, type, previewImage, id} = offer;
 
 
@@ -19,8 +19,8 @@ function Promo(props) {
 
 
   return (
-    <article className="cities__place-card place-card" onMouseEnter={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+    <article className={`${classCard} place-card`} onMouseEnter={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
+      <div className={`${classImage} place-card__image-wrapper`}>
         <Link to={AppRoute.ROOM}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
         </Link>
@@ -58,6 +58,8 @@ function Promo(props) {
 Promo.propTypes = {
   offer: mainPageScreenProp,
   onOfferIdHover: PropTypes.func.isRequired,
+  classCard: PropTypes.string.isRequired,
+  classImage: PropTypes.string.isRequired,
 };
 
 export default Promo;

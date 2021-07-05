@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 
 function ReviewsList(props) {
   const {comments} = props;
-  // console.log(comments);
   return (
     <ul className="reviews__list">
-      <ReviewsItem comments={comments}/>
+      {comments.map((comment) => (
+        <ReviewsItem comment={comment} key={comment.id}/>
+      ))}
     </ul>
   );
 }
