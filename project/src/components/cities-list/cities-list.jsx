@@ -9,16 +9,16 @@ function CitiesList(props) {
     <section className="locations container">
       <ul className="locations__list tabs__list">
         {cities.map((cityElement) => (
-          <li className="locations__item" key={cityElement}>
-            <a className={`locations__item-link tabs__item ${city === cityElement ? (
+          <li className="locations__item" key={cityElement.title}>
+            <a className={`locations__item-link tabs__item ${city === cityElement.title ? (
               classActive)
               : ''
             }`} href="#" onClick={(evt) => {
               evt.preventDefault();
-              onCityChange(cityElement);
+              onCityChange(cityElement.title);
             }}
             >
-              <span>{cityElement}</span>
+              <span>{cityElement.title}</span>
             </a>
           </li>
         ))}

@@ -15,17 +15,19 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [15, 30],
 });
 
-function MapCityMain({city, offers, selectedOfferId, classMap}) {
+function MapCityMain({city, selectCity, offers, selectedOfferId, classMap}) {
   const mapRef = useRef(null);
   const map = useRef(null);
+  const filteredCity = city.filter((cityElement) => selectCity === cityElement.title);
+
 
   useEffect(() => {
     map.current = leaflet.map(mapRef.current, {
       center: {
-        lat: city.latitude,
-        lng: city.longitude,
+        lat: filteredCity[0].latitude,
+        lng: filteredCity[0].longitude,
       },
-      zoom: city.zoom,
+      zoom: filteredCity[0].zoom,
       zoomControl: false,
       marker: true,
     });
@@ -42,7 +44,7 @@ function MapCityMain({city, offers, selectedOfferId, classMap}) {
     return () => {
       map.current.remove();
     };
-  }, [city]);
+  }, [filteredCity[0]]);
 
   useEffect(() => {
     const markers = [];
@@ -80,6 +82,7 @@ MapCityMain.propTypes = {
   offers: PropTypes.array.isRequired,
   selectedOfferId: PropTypes.number,
   classMap: PropTypes.string.isRequired,
+  selectCity: PropTypes.string.isRequired,
 };
 
 export default MapCityMain;

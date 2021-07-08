@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Promo from '../promo/promo';
 import MapCityMain from '../map-city-main/map-city-main';
-import {CITY, CITIES_NAME} from '../../const';
+import {CITIES_LIST} from '../../const';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import CitiesList from '../cities-list/cities-list';
@@ -54,14 +54,14 @@ function MainPageScreen(props) {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList cities={CITIES_NAME} city={city} onCityChange={onCityChange}/>
+          <CitiesList cities={CITIES_LIST} city={city} onCityChange={onCityChange}/>
 
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{filteredOffers.length} places to stay in Amsterdam</b>
+              <b className="places__found">{filteredOffers.length} places to stay in {city}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -82,7 +82,7 @@ function MainPageScreen(props) {
               </div>
             </section>
             <div className="cities__right-section">
-              <MapCityMain city={CITY} offers={filteredOffers} selectedOfferId={selectedOfferId}
+              <MapCityMain city={CITIES_LIST} selectCity={city} offers={filteredOffers} selectedOfferId={selectedOfferId}
                 classMap="cities__map"
               />
             </div>

@@ -5,8 +5,8 @@ const offers = [
     city: {
       name: 'Paris',
       location: {
-        latitude: 52.3909553943508,
-        longitude: 4.85309666406198,
+        latitude: 48.872548,
+        longitude: 2.301723,
         zoom: 13,
       },
     },
@@ -285,6 +285,3 @@ const comments = [
 ];
 
 export {offers, comments};
-
-export class CITIES_NAME {
-}
