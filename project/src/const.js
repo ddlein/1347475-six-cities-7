@@ -27,4 +27,13 @@ const OfferTypeToText = {
   [OfferType.HOTEL]: 'Hotel',
 };
 
-export {AppRoute, CITY, OfferType, OfferTypeToText};
+const CITIES_NAME = [
+  'Paris',
+  'Cologne',
+  'Brussels',
+  'Amsterdam',
+  'Hamburg',
+  'Dusseldorf',
+];
+
+export {AppRoute, CITY, OfferType, OfferTypeToText, CITIES_NAME};

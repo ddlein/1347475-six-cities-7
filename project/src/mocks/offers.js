@@ -3,7 +3,7 @@ const AVATAR_URL = 'https://i.pravatar.cc/128';
 const offers = [
   {
     city: {
-      name: 'Amsterdam',
+      name: 'Paris',
       location: {
         latitude: 52.3909553943508,
         longitude: 4.85309666406198,
@@ -118,7 +118,7 @@ const offers = [
   },
   {
     city: {
-      name: 'Amsterdam',
+      name: 'Cologne',
       location: {
         latitude: 52.3909553943508,
         longitude: 4.929309666406198,
@@ -285,3 +285,6 @@ const comments = [
 ];
 
 export {offers, comments};
+
+export class CITIES_NAME {
+}
