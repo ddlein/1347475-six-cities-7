@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {CITIES_LIST} from '../../const';
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: '/img/pin.svg',
@@ -15,10 +16,10 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [15, 30],
 });
 
-function MapCityMain({city, selectCity, offers, selectedOfferId, classMap}) {
+function MapCityMain({selectCity, offers, selectedOfferId, classMap}) {
   const mapRef = useRef(null);
   const map = useRef(null);
-  const filteredCity = city.filter((cityElement) => selectCity === cityElement.title);
+  const filteredCity = CITIES_LIST.filter((cityElement) => selectCity === cityElement.title);
 
 
   useEffect(() => {
@@ -78,7 +79,6 @@ function MapCityMain({city, selectCity, offers, selectedOfferId, classMap}) {
 }
 
 MapCityMain.propTypes = {
-  city: PropTypes.object.isRequired,
   offers: PropTypes.array.isRequired,
   selectedOfferId: PropTypes.number,
   classMap: PropTypes.string.isRequired,

@@ -66,13 +66,5 @@ const OfferTypeToText = {
   [OfferType.HOTEL]: 'Hotel',
 };
 
-// const CITIES_NAME = [
-//   'Paris',
-//   'Cologne',
-//   'Brussels',
-//   'Amsterdam',
-//   'Hamburg',
-//   'Dusseldorf',
-// ];
 
 export {AppRoute, OfferType, OfferTypeToText, CITIES_LIST, CITY};

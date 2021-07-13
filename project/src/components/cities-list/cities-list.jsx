@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {CITIES_LIST} from '../../const';
 
 function CitiesList(props) {
-  const {cities, city, onCityChange} = props;
+  const {city, onCityChange} = props;
   const classActive = 'tabs__item--active';
 
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {cities.map((cityElement) => (
+        {CITIES_LIST.map((cityElement) => (
           <li className="locations__item" key={cityElement.title}>
-            <a className={`locations__item-link tabs__item ${city === cityElement.title ? (
+            <span style={{cursor: 'pointer'}} className={`locations__item-link tabs__item ${city === cityElement.title ? (
               classActive)
               : ''
-            }`} href="#" onClick={(evt) => {
-              evt.preventDefault();
+            }`}  onClick={(evt) => {
               onCityChange(cityElement.title);
             }}
             >
               <span>{cityElement.title}</span>
-            </a>
+            </span>
           </li>
         ))}
 
@@ -29,7 +29,6 @@ function CitiesList(props) {
 }
 
 CitiesList.propTypes = {
-  cities: PropTypes.array.isRequired,
   onCityChange: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
 };
