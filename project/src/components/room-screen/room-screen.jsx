@@ -3,7 +3,7 @@ import Logo from '../logo/logo';
 import SendReview from '../send-review/send-review';
 import ReviewsList from '../reviews-list/reviews-list';
 import PropTypes from 'prop-types';
-import {CITY, OfferTypeToText} from '../../const';
+import {OfferTypeToText, CITIES_LIST} from '../../const';
 import Promo from '../promo/promo';
 import MapCityMain from '../map-city-main/map-city-main';
 
@@ -148,7 +148,7 @@ function RoomScreen(props) {
             </div>
           </div>
           <section className="property__map map">
-            <MapCityMain city={CITY} offers={offersNearby} selectedOfferId={selectedOfferId}
+            <MapCityMain city={CITIES_LIST} offers={offersNearby} selectedOfferId={selectedOfferId}
               classMap="property__map"
             />
           </section>

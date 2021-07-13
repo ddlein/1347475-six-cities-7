@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {CITIES_LIST} from '../../const';
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: '/img/pin.svg',
@@ -15,17 +16,19 @@ const currentCustomIcon = leaflet.icon({
   iconAnchor: [15, 30],
 });
 
-function MapCityMain({city, offers, selectedOfferId, classMap}) {
+function MapCityMain({selectCity, offers, selectedOfferId, classMap}) {
   const mapRef = useRef(null);
   const map = useRef(null);
+  const filteredCity = CITIES_LIST.filter((cityElement) => selectCity === cityElement.title);
+
 
   useEffect(() => {
     map.current = leaflet.map(mapRef.current, {
       center: {
-        lat: city.latitude,
-        lng: city.longitude,
+        lat: filteredCity[0].latitude,
+        lng: filteredCity[0].longitude,
       },
-      zoom: city.zoom,
+      zoom: filteredCity[0].zoom,
       zoomControl: false,
       marker: true,
     });
@@ -42,7 +45,7 @@ function MapCityMain({city, offers, selectedOfferId, classMap}) {
     return () => {
       map.current.remove();
     };
-  }, [city]);
+  }, [filteredCity[0]]);
 
   useEffect(() => {
     const markers = [];
@@ -76,10 +79,10 @@ function MapCityMain({city, offers, selectedOfferId, classMap}) {
 }
 
 MapCityMain.propTypes = {
-  city: PropTypes.object.isRequired,
   offers: PropTypes.array.isRequired,
   selectedOfferId: PropTypes.number,
   classMap: PropTypes.string.isRequired,
+  selectCity: PropTypes.string.isRequired,
 };
 
 export default MapCityMain;
