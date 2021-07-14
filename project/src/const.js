@@ -66,5 +66,24 @@ const OfferTypeToText = {
   [OfferType.HOTEL]: 'Hotel',
 };
 
+const SORT_LIST = [
+  {
+    title: 'Popular',
+    id: 0,
+  },
+  {
+    title: 'Price: low to high',
+    id: 1,
+  },
+  {
+    title: 'Price: high to low',
+    id: 2,
+  },
+  {
+    title: 'Top rated first',
+    id: 3,
+  },
+];
 
-export {AppRoute, OfferType, OfferTypeToText, CITIES_LIST, CITY};
+
+export {AppRoute, OfferType, OfferTypeToText, CITIES_LIST, CITY, SORT_LIST};
