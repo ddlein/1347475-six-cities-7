@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
-import {SORT_LIST} from '../../const';
+import {SortOption} from '../../const';
 import PropTypes from 'prop-types';
 
 
 function Sorting(props) {
-  const {activeSort, clickHandlerSort, classActiveItem} = props;
-  const [classActive, setClassActive] = useState('');
+  const {activeSort, onChange} = props;
+  const [isOpened, setIsOpened] = useState('');
+
+
   return (
     <form className="places__sorting" action="#" method="get" onClick={() => {
-      setClassActive(classActive === '' ? 'places__options--opened' : '');
+      setIsOpened(isOpened === '' ? 'places__options--opened' : '');
     }}
     >
       <span className="places__sorting-caption">Sort by </span>
@@ -18,25 +20,20 @@ function Sorting(props) {
           <use xlinkHref="#icon-arrow-select"/>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${classActive}`} onClick={(evt) => {
-        clickHandlerSort(evt);
-      }}
-      >
-        {SORT_LIST.map((item) => (
-          <li className={`places__option ${classActiveItem[item.id] ? 'places__option--active' : ''}`} key={item.id}
-            tabIndex="0"
-          >{item.title}
+      <ul className={`places__options places__options--custom ${isOpened}`}>
+        {Object.entries(SortOption).map(([, title]) => (
+          <li className={`places__option  ${activeSort === title ? 'places__option--active' : ''}`} key={title}
+            tabIndex="0" onClick={() => onChange(title)}
+          >{title}
           </li>))}
       </ul>
     </form>
   );
 }
 
-
 Sorting.propTypes = {
   activeSort: PropTypes.string.isRequired,
-  clickHandlerSort: PropTypes.func.isRequired,
-  classActiveItem: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default Sorting;

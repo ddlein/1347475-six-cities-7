@@ -6,39 +6,38 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import CitiesList from '../cities-list/cities-list';
 import Sorting from '../sorting/sorting';
-import {SORT_LIST} from '../../const';
+import {SortOption} from '../../const';
 
 function MainPageScreen(props) {
+  const {POPULAR, LOW_TO_HIGH, HIGH_TO_LOW, TOP} = SortOption;
+
   const [selectedOfferId, setSelectedId] = useState(null);
-  const [activeSort, setActiveSort] = useState('Popular');
-  const [classActiveItem, setClassActiveItem] = useState([false, false, false, false]);
-  const [popular, lowToHigh, highToLow, topRated] = SORT_LIST;
+  const [activeSort, setActiveSort] = useState(POPULAR);
+
   const {offers, onCityChange, city} = props;
   const onOfferIdHover = (offerId) => {
     setSelectedId(offerId);
   };
 
-  const clickHandlerSort = (evt) => {
-    setActiveSort(evt.target.textContent);
-    const selectedId = SORT_LIST.find((item) => item.title === evt.target.textContent).id;
-    setClassActiveItem([...classActiveItem.slice(0, selectedId).map((i) => false), true, ...classActiveItem.slice(selectedId + 1).map((i) => false)]);
+  const onChange = (title) => {
+    setActiveSort(title);
   };
 
 
   const filteredOffers = offers.filter((offer) => offer.city.name === city);
-  let sortedOffers = [];
+  let sortedOffers = [...filteredOffers];
 
   switch (activeSort) {
-    case highToLow.title:
+    case HIGH_TO_LOW:
       sortedOffers = filteredOffers.sort((a, b) => b.price - a.price);
       break;
-    case lowToHigh.title:
+    case LOW_TO_HIGH:
       sortedOffers = filteredOffers.sort((a, b) => a.price - b.price);
       break;
-    case popular.title:
+    case POPULAR:
       sortedOffers = filteredOffers;
       break;
-    case topRated.title:
+    case TOP:
       sortedOffers = filteredOffers.sort((a, b) => b.rating - a.rating);
       break;
     default:
@@ -93,7 +92,7 @@ function MainPageScreen(props) {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{sortedOffers.length} places to stay in {city}</b>
 
-              <Sorting activeSort={activeSort} clickHandlerSort={clickHandlerSort} classActiveItem={classActiveItem}/>
+              <Sorting activeSort={activeSort} onChange={onChange} setActiveSort={setActiveSort} />
 
               <div className="cities__places-list places__list tabs__content">
                 {promos}
