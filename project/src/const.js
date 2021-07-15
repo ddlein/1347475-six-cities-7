@@ -67,4 +67,12 @@ const OfferTypeToText = {
 };
 
 
-export {AppRoute, OfferType, OfferTypeToText, CITIES_LIST, CITY};
+const SortOption = {
+  POPULAR: 'Popular',
+  LOW_TO_HIGH: 'Price: low to high',
+  HIGH_TO_LOW: 'Price: high to low',
+  TOP: 'Top rated first',
+};
+
+
+export {AppRoute, OfferType, OfferTypeToText, CITIES_LIST, CITY, SortOption};

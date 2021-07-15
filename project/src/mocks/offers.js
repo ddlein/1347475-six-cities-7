@@ -120,8 +120,8 @@ const offers = [
     city: {
       name: 'Cologne',
       location: {
-        latitude: 52.3909553943508,
-        longitude: 4.929309666406198,
+        latitude: 50.930779,
+        longitude: 6.938399,
         zoom: 13,
       },
     },
