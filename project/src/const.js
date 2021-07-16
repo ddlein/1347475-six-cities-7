@@ -74,5 +74,17 @@ const SortOption = {
   TOP: 'Top rated first',
 };
 
+const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
+};
 
-export {AppRoute, OfferType, OfferTypeToText, CITIES_LIST, CITY, SortOption};
+const APIRoute = {
+  OFFERS: '/hotels',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+};
+
+
+export {AppRoute, OfferType, OfferTypeToText, CITIES_LIST, CITY, SortOption, AuthorizationStatus,APIRoute};

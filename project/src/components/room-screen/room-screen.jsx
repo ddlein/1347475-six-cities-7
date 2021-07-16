@@ -6,12 +6,15 @@ import PropTypes from 'prop-types';
 import {OfferTypeToText, CITIES_LIST} from '../../const';
 import Promo from '../promo/promo';
 import MapCityMain from '../map-city-main/map-city-main';
+import {connect} from 'react-redux';
+
+import {ActionCreator} from '../../store/action';
 
 
 function RoomScreen(props) {
   const [selectedOfferId, setSelectedId] = useState(null);
 
-  const {comments, offers, id} = props;
+  const {comments, offers, id, city} = props;
 
   const offer = offers.find((offerElement) => offerElement.id === id);
   const offersNearby = offers.filter((offerElement) => offerElement.id !== id);
@@ -148,7 +151,7 @@ function RoomScreen(props) {
             </div>
           </div>
           <section className="property__map map">
-            <MapCityMain city={CITIES_LIST} offers={offersNearby} selectedOfferId={selectedOfferId}
+            <MapCityMain selectCity={city} city={CITIES_LIST} offers={offersNearby} selectedOfferId={selectedOfferId}
               classMap="property__map"
             />
           </section>
@@ -172,6 +175,20 @@ RoomScreen.propTypes = {
   comments: PropTypes.array.isRequired,
   offers: PropTypes.array.isRequired,
   id: PropTypes.number.isRequired,
+  city: PropTypes.string.isRequired,
+
 };
 
-export default RoomScreen;
+const mapStateToProps = (state) => ({
+  city: state.city,
+  offers: state.offers,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCityChange(city) {
+    dispatch(ActionCreator.cityChange(city));
+  },
+});
+
+export {RoomScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(RoomScreen);
