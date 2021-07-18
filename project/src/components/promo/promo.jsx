@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import mainPageScreenProp from '../main-page-screen/main-page-screen.prop';
 import {AppRoute} from '../../const';
+import {generatePath} from 'react-router';
+
 
 function Promo(props) {
   const {offer, onOfferIdHover, classCard, classImage} = props;
@@ -21,7 +23,7 @@ function Promo(props) {
   return (
     <article className={`${classCard} place-card`} onMouseEnter={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
       <div className={`${classImage} place-card__image-wrapper`}>
-        <Link to={AppRoute.ROOM}>
+        <Link to={generatePath(AppRoute.ROOM, {id: id})}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
         </Link>
       </div>

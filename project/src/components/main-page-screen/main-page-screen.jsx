@@ -6,7 +6,9 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import CitiesList from '../cities-list/cities-list';
 import Sorting from '../sorting/sorting';
-import {SortOption} from '../../const';
+import {AppRoute, AuthorizationStatus, SortOption} from '../../const';
+import {logout} from '../../store/api-actions';
+import {Link} from 'react-router-dom';
 
 function MainPageScreen(props) {
   const {POPULAR, LOW_TO_HIGH, HIGH_TO_LOW, TOP} = SortOption;
@@ -14,7 +16,7 @@ function MainPageScreen(props) {
   const [selectedOfferId, setSelectedId] = useState(null);
   const [activeSort, setActiveSort] = useState(POPULAR);
 
-  const {offers, onCityChange, city} = props;
+  const {offers, onCityChange, city, authorizationStatus, setLogout, user} = props;
   const onOfferIdHover = (offerId) => {
     setSelectedId(offerId);
   };
@@ -22,7 +24,6 @@ function MainPageScreen(props) {
   const onChange = (title) => {
     setActiveSort(title);
   };
-
 
   const filteredOffers = offers.filter((offer) => offer.city.name === city);
   let sortedOffers = [...filteredOffers];
@@ -61,20 +62,30 @@ function MainPageScreen(props) {
               </a>
             </div>
             <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
+              {(authorizationStatus === AuthorizationStatus.AUTH) ? (
+                <ul className="header__nav-list">
+                  <li className="header__nav-item user">
+                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.FAVORITES}>
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                      </div>
+                      <span className="header__user-name user__name">{user.email}</span>
+                    </Link>
+                  </li>
+                  <li className="header__nav-item">
+                    <Link onClick={setLogout} className="header__nav-link" to="/"                    >
+                      <span className="header__login">Sign out</span>
+                    </Link>
+                  </li>
+                </ul>) : (
+                <ul className="header__nav-list">
+                  <li className="header__nav-item user">
+                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.LOGIN}>
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                      </div>
+                      <span className="header__login">Sign in</span>
+                    </Link>
+                  </li>
+                </ul>)}
             </nav>
           </div>
         </div>
@@ -92,7 +103,7 @@ function MainPageScreen(props) {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{sortedOffers.length} places to stay in {city}</b>
 
-              <Sorting activeSort={activeSort} onChange={onChange} setActiveSort={setActiveSort} />
+              <Sorting activeSort={activeSort} onChange={onChange}/>
 
               <div className="cities__places-list places__list tabs__content">
                 {promos}
@@ -111,13 +122,18 @@ function MainPageScreen(props) {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user,
   city: state.city,
   offers: state.offers,
+  authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityChange(city) {
     dispatch(ActionCreator.cityChange(city));
+  },
+  setLogout() {
+    dispatch(logout());
   },
 });
 
@@ -125,6 +141,9 @@ MainPageScreen.propTypes = {
   onCityChange: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
   offers: PropTypes.array.isRequired,
+  setLogout: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 
