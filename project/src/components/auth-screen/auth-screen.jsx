@@ -1,27 +1,26 @@
 import React, {useRef} from 'react';
 import Logo from '../logo/logo';
 import {login} from '../../store/api-actions';
-import {AppRoute} from '../../const';
-import {useHistory} from 'react-router-dom';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-function AuthScreen({onSubmit}) {
+function AuthScreen({onSubmit, authorizationStatus}) {
   const loginRef = useRef();
   const passwordRef = useRef();
 
-  const history = useHistory();
+  if (authorizationStatus === AuthorizationStatus.AUTH) {
+    return <Redirect to={AppRoute.ROOT} />;
+  }
 
-  const goToMain = () => {
-    history.push(AppRoute.ROOT);
-  };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onSubmit({
       login: loginRef.current.value,
       password: passwordRef.current.value,
     });
-    goToMain();
   };
 
 
@@ -82,7 +81,12 @@ function AuthScreen({onSubmit}) {
 
 AuthScreen.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+});
 
 
 const mapDispatchToProps = (dispatch) => ({
@@ -92,4 +96,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {AuthScreen};
-export default connect(null, mapDispatchToProps)(AuthScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);

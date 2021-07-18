@@ -4,7 +4,7 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import App from './components/app/app';
-import {/*offers,*/ comments} from './mocks/offers';
+import {comments} from './mocks/offers';
 import {reducer} from './store/reducer';
 import thunk from 'redux-thunk';
 import {createAPI} from './services/api';

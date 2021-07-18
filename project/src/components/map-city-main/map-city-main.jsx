@@ -2,12 +2,14 @@ import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {CITIES} from '../../const';
 
 const defaultCustomIcon = leaflet.icon({
   iconUrl: '/img/pin.svg',
   iconSize: [30, 30],
   iconAnchor: [15, 30],
 });
+
 
 const currentCustomIcon = leaflet.icon({
   iconUrl: '/img/pin-active.svg',
@@ -18,15 +20,14 @@ const currentCustomIcon = leaflet.icon({
 function MapCityMain({selectCity, offers, selectedOfferId, classMap}) {
   const mapRef = useRef(null);
   const map = useRef(null);
-  const filteredCity = offers.filter((cityElement) => selectCity === cityElement.city.name);
 
   useEffect(() => {
     map.current = leaflet.map(mapRef.current, {
       center: {
-        lat: filteredCity[0].city.location.latitude,
-        lng: filteredCity[0].city.location.longitude,
+        lat: CITIES[selectCity].location.latitude,
+        lng: CITIES[selectCity].location.longitude,
       },
-      zoom: filteredCity[0].city.location.zoom,
+      zoom: CITIES[selectCity].location.zoom,
       zoomControl: false,
       marker: true,
     });
@@ -43,7 +44,7 @@ function MapCityMain({selectCity, offers, selectedOfferId, classMap}) {
     return () => {
       map.current.remove();
     };
-  }, [filteredCity[0]]);
+  }, [CITIES[selectCity]]);
 
   useEffect(() => {
     const markers = [];

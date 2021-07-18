@@ -52,4 +52,4 @@ const comments = [
   },
 ];
 
-export {/*offers,*/ comments};
+export {comments};

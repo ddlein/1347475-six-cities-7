@@ -4,6 +4,7 @@ const ActionType = {
   SET_OFFERS: 'main/setOffers',
   REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
   LOGOUT: 'user/logout',
+  SET_USER: 'user/setUser',
 };
 
 const ActionCreator = {
@@ -21,6 +22,10 @@ const ActionCreator = {
   }),
   logout: () => ({
     type: ActionType.LOGOUT,
+  }),
+  setUser: (user) => ({
+    type: ActionType.SET_USER,
+    payload: user,
   }),
 };
 

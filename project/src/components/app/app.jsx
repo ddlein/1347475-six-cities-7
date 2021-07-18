@@ -33,7 +33,9 @@ function App(props) {
         <Route exact path={AppRoute.LOGIN}>
           <AuthScreen/>
         </Route>
-        <PrivateRoute exact path={AppRoute.FAVORITES} render={() => <FavoritesScreen offers={offers}/>} authorizationStatus={authorizationStatus} autorization={AuthorizationStatus.AUTH}>
+        <PrivateRoute exact path={AppRoute.FAVORITES} render={() => <FavoritesScreen offers={offers}/>}
+          authorizationStatus={authorizationStatus}
+        >
         </PrivateRoute>
         <Route exact path={AppRoute.ROOM}>
           <RoomScreen comments={comments} offers={offers} id={1}/>

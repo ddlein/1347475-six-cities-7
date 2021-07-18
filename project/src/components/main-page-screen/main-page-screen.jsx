@@ -16,7 +16,7 @@ function MainPageScreen(props) {
   const [selectedOfferId, setSelectedId] = useState(null);
   const [activeSort, setActiveSort] = useState(POPULAR);
 
-  const {offers, onCityChange, city, authorizationStatus, setLogout} = props;
+  const {offers, onCityChange, city, authorizationStatus, setLogout, user} = props;
   const onOfferIdHover = (offerId) => {
     setSelectedId(offerId);
   };
@@ -24,7 +24,6 @@ function MainPageScreen(props) {
   const onChange = (title) => {
     setActiveSort(title);
   };
-  const email1 = localStorage.getItem('email');
 
   const filteredOffers = offers.filter((offer) => offer.city.name === city);
   let sortedOffers = [...filteredOffers];
@@ -69,14 +68,11 @@ function MainPageScreen(props) {
                     <Link className="header__nav-link header__nav-link--profile" to={AppRoute.FAVORITES}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">{email1}</span>
+                      <span className="header__user-name user__name">{user.email}</span>
                     </Link>
                   </li>
                   <li className="header__nav-item">
-                    <Link onClick={() => {
-                      setLogout();
-                    }} className="header__nav-link" to="/"
-                    >
+                    <Link onClick={setLogout} className="header__nav-link" to="/"                    >
                       <span className="header__login">Sign out</span>
                     </Link>
                   </li>
@@ -126,6 +122,7 @@ function MainPageScreen(props) {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user,
   city: state.city,
   offers: state.offers,
   authorizationStatus: state.authorizationStatus,
@@ -146,6 +143,7 @@ MainPageScreen.propTypes = {
   offers: PropTypes.array.isRequired,
   setLogout: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 
